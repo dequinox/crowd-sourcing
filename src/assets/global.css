@@ -1,0 +1,10 @@
+body {
+    background-color: #e0e0e0;
+    height: 90%;
+}
+
+html {
+    height: 100%;
+}
+
+@import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");
