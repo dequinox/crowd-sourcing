@@ -10,11 +10,12 @@
               v-bind:options="mapStyle"
             >
               <GmapMarker
-                :key="request.id"
-                v-for="request in requests"
-                :position="request.location"
+                :key="marker.id"
+                v-for="marker in markers"
+                :position="marker.location"
                 :clickable="true"
-                @click="select(request)"
+                :icon="marker.icon"
+                @click="select(marker)"
               />
           </GmapMap>
         </div>
@@ -197,9 +198,6 @@
         data() {
             return {
                 mapStyle: {styles: mapStyles},
-                micon: {
-                    path: './blue.png'
-                }
             }
         },
 
@@ -213,6 +211,27 @@
                 requests: 'markedRequests',
 
             }),
+
+            markers: function() {
+                return this.requests.map( (r) => {
+                    if (r.status === "completed"){
+                        r.icon = { url : "https://image.ibb.co/kNDtwo/green.png"}
+                    }
+                    else if (r.status === "pending") {
+                        r.icon = { url : "https://image.ibb.co/eMX6z8/yellow.png"}
+                    }
+                    else {
+                        r.icon = { url: "https://image.ibb.co/eFrDCT/grey.png"}
+                    }
+                    return r
+                })
+            },
+
+            getIcon(status){
+                return {
+                    url: "https://image.ibb.co/kNDtwo/green.png"
+                }
+            }
         },
 
         methods: {
@@ -231,12 +250,11 @@
     }
 
      .map {
-        height: 94%;
+        height: 96%;
     }
 
     .bottom {
        padding: 10px;
-        height: 6%;
     }
     span::before {
         content: "";
