@@ -4,34 +4,41 @@
         width="150px"
         height="150px"
         src="https://s.yimg.com/ny/api/res/1.2/81EFT_aygExFdnRjnpnC.A--/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9ODAw/http://media.zenfs.com/en-US/homerun/the_zoe_report_fashion_166/00f649c6b13a6a1bb6ad971428d79d0a"/>
-
         <div v-else class="list">
-        <label class="col-auto">
-            <input type="radio" name="radio" value="idea" v-model="type"> <span class="label-text">Idea</span>
-        </label>
-        <label class="col-auto">
-            <input type="radio" name="radio" value="problem" v-model="type"> <span class="label-text">Problem</span>
-        </label>
-            <!--<input type="radio" id="idea" value="idea" v-model="type">
-            <label for="one">Idea</label>
-            <input type="radio" id="problem" value="problem" v-model="type">
-            <label for="two">Problem</label>
-            <br>-->
+            <div class="filter">
+                <div class="row">
+                    <label class="col-auto">
+                        <input type="radio" name="radio" value="problem" v-model="type"> <span class="label-text">Проблема</span>
+                    </label>
+                    <label class="col-auto">
+                        <input type="radio" name="radio" value="idea" v-model="type"> <span class="label-text">Идея</span>
+                    </label>
+                </div>
 
-            <select v-model="status" class="form-control mt-4">
-              <option value="all">All</option>
-              <option value="pending">Pending</option>
-              <option value="deleted">Deleted</option>
-              <option value="completed">Completed</option>
-            </select>
-                <ul class="mt-4 list-group">
+                <div class="row mt-4">
+                    <div class="input-group col-9">
+                      <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">Статус</label>
+                      </div>
+                      <select v-model="status" class="custom-select">
+                        <option value="all" selected>Все</option>
+                        <option value="completed">В работе</option>
+                        <option value="pending">На обсуждении</option>
+                        <option value="deleted">Не просмотрено</option>
+                      </select>
+                    </div>
+
+                </div>
+            </div>
+
+                <ul class="list-group border rounded">
                     <li v-for="request in requests"
                     v-if="requestSatisfied(request)"
                     v-on:click="select(request)"
                     class="list-group-item "
-                    v-bind:class="request.status">
+                    v-bind:class="[selected && request.id === selected.id ? activeClass : '', request.status]">
                     <div class="row h-50">
-                        <strong class="text-left col col-sm-9">{{ request.title }}</strong><br/>
+                        <strong class="text-left col col-sm-9 text-truncate">{{ request.title }}</strong><br/>
                         <p class="text-right col align-self-end date">{{ request.date }}</p>
                     </div>
                     <div class="row h-50">
@@ -52,6 +59,7 @@
         data() {
             return {
                 loading: false,
+                activeClass: 'selected',
             }
         },
 
@@ -100,6 +108,12 @@
 </script>
 
 <style scoped>
+    .filter {
+        height: 12%;
+    }
+    .selected {
+        background-color: rgba(56, 176, 157, 0.2);
+    }
     .status {
         height: 10px;
         width: 10px;
@@ -111,11 +125,11 @@
     }
 
     .pending {
-        border-left: 3px solid orange;
+        border-left: 3px solid #edbb07;
     }
 
     .deleted {
-        border-left: 3px solid red;
+        border-left: 3px solid #6c6865;
     }
 
     input[type="radio"]:checked {
@@ -200,13 +214,10 @@
     height: 100%;
 }
 
-.selected {
-    background-color: red;
-}
-
 ul {
-    max-height: 80%;
-    overflow-y: scroll;
+    font-size: 12px;
+    height: 88%;
+    overflow-y: hidden;
     overflow-x: hidden;
 }
 

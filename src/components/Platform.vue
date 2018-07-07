@@ -28,8 +28,8 @@
     #platform {
         background-color: white;
         margin: 0 2px;
-        padding: 20px;
-        height: 95%;
+        padding: 30px;
+        height: 100%;
     }
 
     .row, .sidebar {

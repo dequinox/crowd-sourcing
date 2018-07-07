@@ -4,14 +4,14 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
-                  <li class="nav-item selected">
+                  <li class="nav-item selected rounded">
                       <a class="nav-link" href="#">Обработка Заявок<span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="#">Проекты</a>
                   </li>
               </ul>
-              <button type="button" class="btn align-middle"><b>{{ userFirstName }}</b></button>
+              <span class="user align-middle rounded-circle font-weight-bold">{{ user }}</span>
           </div>
         </nav>
     </div>
@@ -21,8 +21,14 @@
     export default {
         data() {
             return {
-                userFirstName : "D",
+                userFirstName : "Doro",
                 userLastname : "Umarov"
+            }
+        },
+
+        computed: {
+            user: function(){
+                return this.userFirstName[0] + this.userLastname[0]
             }
         }
     }
@@ -35,16 +41,13 @@
         -moz-box-shadow: 0 6px 4px -1px #ddd;
         box-shadow: 0 6px 4px -1px #ddd;
     }
-    button {
-        border-radius: 50%;
+    .user {
         background-color: #38B09D;
         color: white;
-        height: 30px;
-        width: 30px;
-        padding: 5px;
+        padding: 7px;
     }
     li {
-        margin: 10px;
+        margin: 15px;
     }
     .selected {
         background-color: #38B09D;
