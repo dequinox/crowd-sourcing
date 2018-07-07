@@ -10,7 +10,7 @@ export default new Vuex.Store({
         status: "all",
         type: "idea",
         selectedRequest: null,
-        center: { lat: 10, lng: 20 },
+        center: { lat: 55.793633, lng: 49.116411 },
     },
 
     getters: {
@@ -43,6 +43,7 @@ export default new Vuex.Store({
 
         select(context, selectedRequest) {
             context.commit('setSelectedRequest', selectedRequest)
+            context.commit('setType', selectedRequest.type)
 
             if (selectedRequest.location){
                 context.commit('setCenter', selectedRequest.location)
