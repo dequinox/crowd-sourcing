@@ -128,13 +128,13 @@
             markers: function() {
                 return this.requests.map( (r) => {
                     if (r.status === "completed"){
-                        r.icon = { url : "https://image.ibb.co/kNDtwo/green.png"}
+                        r.icon = { url : "https://image.ibb.co/gqFCNT/greenmark.png"}
                     }
                     else if (r.status === "pending") {
-                        r.icon = { url : "https://image.ibb.co/eMX6z8/yellow.png"}
+                        r.icon = { url : "https://image.ibb.co/bAAe2T/yellowmark.png"}
                     }
                     else {
-                        r.icon = { url: "https://image.ibb.co/eFrDCT/grey.png"}
+                        r.icon = { url: "https://image.ibb.co/dzxRhT/greymark.png"}
                     }
                     return r
                 })
