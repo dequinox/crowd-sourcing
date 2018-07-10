@@ -11,4 +11,8 @@ html {
     font-family: Open Sans;
 }
 
+.custom-select {
+   background-image: url("arrow.png")
+}
+
 @import url("//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css");

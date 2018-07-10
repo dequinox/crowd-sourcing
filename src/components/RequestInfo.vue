@@ -6,13 +6,14 @@
                 <span class="cancel col" v-on:click="select(null)"><img class="float-right" src="https://www.modo.com/wp-content/themes/modo/assets/img/thin-close-icon.png" width="25px" height="25px"/></span>
             </div>
             <div class="row">
-                <span class="text-left col-sm-9 status mt-1" v-bind:class="request.status">Статус: {{ request.status }}</span>
+                <span class="text-left col-sm-9 status mt-1" v-bind:class="request.status">Статус: {{ request.status | translate }}</span>
             </div>
             <hr>
             <b>Заявитель</b><br/>
             {{ request.sender }} <br/> <br/>
             <b>Описание</b> <br/>
             {{ request.description }} <br/> <br/>
+            <img class="image" v-if="request.image" :src="require(`@/assets/${request.image}`)" height="200px" />
             <div class="form-group">
                 <label><b>Ответ на заявку:</b></label>
                 <textarea class="form-control" v-model="comment" rows="5" placeholder="Напишите ответ заявителю..."></textarea>
@@ -24,9 +25,10 @@
                      </label>
                      <div class="col">
                        <select v-model="status" class="custom-select">
-                         <option value="completed">В работе</option>
-                         <option value="pending">На обсуждении</option>
-                         <option value="deleted">Не просмотрено</option>
+                           <option value="ignored">Не просмотрено</option>
+                           <option value="discussed">На обсуждении</option>
+                           <option value="active">В работе</option>
+                         <option value="completed">Решено</option>
                        </select>
                     </div>
             </div>
@@ -44,7 +46,7 @@
     export default {
         data() {
             return {
-                status: 'pending',
+                status: 'ignored',
                 comment: ''
             }
         },
@@ -53,7 +55,7 @@
 
             ...mapState({
                 request: state => state.selectedRequest
-            })
+            }),
         },
 
         methods: {
@@ -82,18 +84,22 @@
         vertical-align: middle;
         border-radius: 100%;
     }
+
     .completed::before {
         background-color: #22a55a;
     }
 
-    .pending::before {
+    .active::before {
         background-color: #f2c94c;
     }
 
-    .deleted::before {
-        background-color: #511a85;
+    .ignored::before {
+        background-color: #7e7e7e;
     }
 
+    .discussed::before {
+        background-color: #511a85;
+    }
     .custom-select {
         height: 30px;
     }
@@ -110,6 +116,9 @@
         color: white;
         margin-right: 20px;
     }
-    .row {
+
+    .image {
+        margin-bottom: 10px;
+        border-radius: 5px;
     }
 </style>

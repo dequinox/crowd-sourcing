@@ -131,11 +131,15 @@
         background-color: #22a55a;
     }
 
-    .pending::before {
+    .active::before {
         background-color: #f2c94c;
     }
 
-    .deleted::before {
+    .ignored::before {
+        background-color: #7e7e7e;
+    }
+
+    .discussed::before {
         background-color: #511a85;
     }
 
@@ -213,7 +217,7 @@
 
     font-size: 18px;
     content: "\f205";
-	color: #511a85;
+	color: #38B09D;
 	animation: effect 250ms ease-in;
 }
 

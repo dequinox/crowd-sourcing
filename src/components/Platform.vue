@@ -3,7 +3,7 @@
         <div class="row">
             <RequestList class="sidebar col-md-4"/>
             <RequestInfo class="col-md-4"/>
-            <GoogleMap class="col"/>
+            <GoogleMap class="col-md"/>
         </div>
     </div>
 </template>
