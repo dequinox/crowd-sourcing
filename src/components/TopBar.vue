@@ -2,16 +2,16 @@
     <div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse">
               <ul class="navbar-nav mr-auto">
-                  <li class="nav-item selected rounded">
-                      <a class="nav-link" href="#">Обработка Заявок<span class="sr-only">(current)</span></a>
+                  <li class="nav-item selected col-8">
+                      <a class="nav-link" href="#"><b>Обработка Заявок</b><span class="sr-only">(current)</span></a>
                   </li>
                   <li class="nav-item">
                       <a class="nav-link" href="#">Проекты</a>
                   </li>
               </ul>
-              <span class="user align-middle rounded-circle font-weight-bold">{{ user }}</span>
+              <div class="user rounded-circle align-middle"><span>{{user}}</span></div>
           </div>
         </nav>
     </div>
@@ -41,25 +41,36 @@
         -moz-box-shadow: 0 6px 4px -1px #ddd;
         box-shadow: 0 6px 4px -1px #ddd;
     }
+    button {
+        padding: auto;
+    }
+    .user b {
+        line-height: 40px;
+    }
     .user {
         background-color: #38B09D;
         color: white;
-        padding: 7px;
+        height: 40px;
+        width: 40px;
+        margin: 15px;
+    }
+    .user span {
+        line-height: 40px;
     }
     li {
         margin: 15px;
     }
-    .selected {
-        background-color: #38B09D;
+    .nav-item {
+        padding: 3px;
+        border-radius: 20px;
     }
-    .nav-item .nav-link {
+    a {
         color: #38B09D;
     }
     .selected .nav-link {
-        color: white;
+        color: #38B09D;
     }
     .nav-link {
-        font-weight: bold;
         padding: 5px;
     }
 </style>

@@ -4,7 +4,7 @@
         width="150px"
         height="150px"
         src="https://s.yimg.com/ny/api/res/1.2/81EFT_aygExFdnRjnpnC.A--/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9ODAw/http://media.zenfs.com/en-US/homerun/the_zoe_report_fashion_166/00f649c6b13a6a1bb6ad971428d79d0a"/>
-        <div v-else class="list">
+        <div v-else class="list border">
             <div class="filter">
                 <div class="row">
                     <label class="col-auto">
@@ -15,34 +15,33 @@
                     </label>
                 </div>
 
-                <div class="row mt-4">
-                    <div class="input-group col-9">
-                      <div class="input-group-prepend">
-                        <label class="input-group-text" for="inputGroupSelect01">Статус</label>
-                      </div>
-                      <select v-model="status" class="custom-select">
+                <div class="row mt-3">
+                      <label class="col-auto stat">
+                          <b>Статус:</b>
+                      </label>
+                      <select v-model="status" class="custom-select col-7">
                         <option value="all" selected>Все</option>
-                        <option value="completed">В работе</option>
-                        <option value="pending">На обсуждении</option>
-                        <option value="deleted">Не просмотрено</option>
+                        <option value="ignored">Не просмотрено</option>
+                        <option value="disscussed">На обсуждении</option>
+                        <option value="active">В работе</option>
+                        <option value="completed">Решено</option>
                       </select>
-                    </div>
 
                 </div>
             </div>
 
-                <ul class="list-group border rounded">
+                <ul class="list-group">
                     <li v-for="request in requests"
                     v-if="requestSatisfied(request)"
                     v-on:click="select(request)"
-                    class="list-group-item "
-                    v-bind:class="[selected && request.id === selected.id ? activeClass : '', request.status]">
-                    <div class="row h-50">
+                    class="list-group-item rounded-0"
+                    v-bind:class="[selected && request.id === selected.id ? activeClass : '']">
+                    <div class="row">
                         <strong class="text-left col col-sm-9 text-truncate">{{ request.title }}</strong><br/>
                         <p class="text-right col align-self-end date">{{ request.date }}</p>
                     </div>
-                    <div class="row h-50">
-                        <p class="text-left col col-sm-9 satus">Статус: {{ request.status }}</p>
+                    <div class="row">
+                        <p class="text-left col col-sm-9 status" v-bind:class="[request.status]">Статус: {{ request.status }}</p>
                         <p class="text-right col align-self-end date">{{ request.time }}</p>
                     </div>
                     </li>
@@ -109,27 +108,35 @@
 
 <style scoped>
     .filter {
+        padding-top: 20px;
+        padding-left: 20px;
         height: 12%;
     }
     .selected {
+        border-top: 1px solid #dee2e6;
+        border-bottom: 1px solid #dee2e6;
         background-color: rgba(56, 176, 157, 0.2);
     }
-    .status {
-        height: 10px;
-        width: 10px;
-        border-radius: 100%;
+    .status::before {
+            content: "";
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            margin-right: 5px;
+            vertical-align: middle;
+            border-radius: 100%;
     }
 
-    .completed {
-        border-left: 3px solid #38B09D;
+    .completed::before {
+        background-color: #22a55a;
     }
 
-    .pending {
-        border-left: 3px solid #edbb07;
+    .pending::before {
+        background-color: #f2c94c;
     }
 
-    .deleted {
-        border-left: 3px solid #6c6865;
+    .deleted::before {
+        background-color: #511a85;
     }
 
     input[type="radio"]:checked {
@@ -142,7 +149,17 @@
         opacity: 0;
     }
 
-
+    .custom-select {
+        height: 30px;
+    }
+    .stat {
+        margin: auto 0;
+        vertical-align: middle;
+        text-align: center;
+    }
+    .stat b {
+        margin: 0;
+    }
     input[type="radio"] + .label-text:before{
     	content: "\f10c";
         font-size: 18px;
@@ -196,7 +213,7 @@
 
     font-size: 18px;
     content: "\f205";
-	color: #38B09D;
+	color: #511a85;
 	animation: effect 250ms ease-in;
 }
 
@@ -212,13 +229,26 @@
 
 .list {
     height: 100%;
+    border-radius: 5px;
 }
 
 ul {
-    font-size: 12px;
+    padding-top: 10px;
     height: 88%;
     overflow-y: hidden;
     overflow-x: hidden;
 }
+ li {
+     padding-left: 20px;
+     padding-right: 20px;
+     border-left: none;
+     border-right: none;
+ }
+
+ li:hover {
+     border-top: 1px solid #dee2e6;
+     border-bottom: 1px solid #dee2e6;
+     background-color: rgba(56, 176, 157, 0.1);
+ }
 
 </style>

@@ -1,5 +1,6 @@
 <template>
-    <div class="box rounded border">
+    <div class="box border">
+        <div class="top text-left"><b>На карте отображено {{ totalMarked }} из 10 заявок</b></div>
         <div class="map">
             <GmapMap
               :center="center"
@@ -19,7 +20,7 @@
               />
           </GmapMap>
         </div>
-      <div class="bottom">
+      <div class="bottom text-left">
           <span @click="$store.commit('setStatus', 'completed')" class="completed">В работе</span>
           <span @click="$store.commit('setStatus', 'pending')" class="pending">На обсуждении</span>
           <span @click="$store.commit('setStatus', 'deleted')" class="deleted">Не просмотрено</span>
@@ -32,78 +33,165 @@
     import {mapState, mapGetters, mapActions} from 'vuex'
     import {gmapApi} from 'vue2-google-maps'
 
-    var mapStyles =
-
-[
-    {
-        "featureType": "landscape.natural",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "color": "#e0efef"
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "hue": "#1900ff"
-            },
-            {
-                "color": "#c0e8e8"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "lightness": 100
-            },
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit.line",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "on"
-            },
-            {
-                "lightness": 700
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#7dcdcd"
-            }
-        ]
-    }
+    var mapStyles = [
+  {
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.icon",
+    "stylers": [
+      {
+        "visibility": "off"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      {
+        "color": "#f5f5f5"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.land_parcel",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#bdbdbd"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "poi",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "road",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#ffffff"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#757575"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#dadada"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#616161"
+      }
+    ]
+  },
+  {
+    "featureType": "road.local",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.line",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#e5e5e5"
+      }
+    ]
+  },
+  {
+    "featureType": "transit.station",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#eeeeee"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry",
+    "stylers": [
+      {
+        "color": "#c9c9c9"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "labels.text.fill",
+    "stylers": [
+      {
+        "color": "#9e9e9e"
+      }
+    ]
+  }
 ];
 
     export default {
@@ -122,19 +210,20 @@
 
             ...mapGetters({
                 requests: 'markedRequests',
+                totalMarked: 'totalMarked'
 
             }),
 
             markers: function() {
                 return this.requests.map( (r) => {
                     if (r.status === "completed"){
-                        r.icon = { url : "https://image.ibb.co/gqFCNT/greenmark.png"}
+                        r.icon = { url : "https://image.ibb.co/j7RghT/green2.png"}
                     }
                     else if (r.status === "pending") {
-                        r.icon = { url : "https://image.ibb.co/bAAe2T/yellowmark.png"}
+                        r.icon = { url : "https://image.ibb.co/kQNbGo/yellow2.png"}
                     }
                     else {
-                        r.icon = { url: "https://image.ibb.co/dzxRhT/greymark.png"}
+                        r.icon = { url: "https://image.ibb.co/k3z1hT/purple.png"}
                     }
                     return r
                 })
@@ -158,16 +247,24 @@
 </script>
 
 <style scoped>
+    .top {
+        padding: auto 0;
+        height: 4%;
+    }
     .box {
+        border-radius: 5px;
         padding: 10px;
     }
 
      .map {
-        height: 96%;
+        height: 92%;
     }
 
     .bottom {
        padding: 10px;
+    }
+    span {
+        margin-right: 15px;
     }
     span::before {
         content: "";
@@ -180,14 +277,14 @@
     }
 
     .completed::before {
-        background-color: #38B09D;
+        background-color: #27ae60;
     }
 
     .pending::before {
-        background-color: #edbb07;
+        background-color: #f2c94c;
     }
 
     .deleted::before {
-        background-color: #6c6865;
+        background-color: #511a85;
     }
 </style>

@@ -1,8 +1,8 @@
 <template>
     <div id="platform">
         <div class="row">
-            <RequestList class="sidebar col-md-3"/>
-            <RequestInfo class="col-md-3"/>
+            <RequestList class="sidebar col-md-4"/>
+            <RequestInfo class="col-md-4"/>
             <GoogleMap class="col"/>
         </div>
     </div>
