@@ -22,7 +22,7 @@
                       <select v-model="status" class="custom-select col-7">
                         <option value="all" selected>Все</option>
                         <option value="ignored">Не просмотрено</option>
-                        <option value="disscussed">На обсуждении</option>
+                        <option value="discussed">На обсуждении</option>
                         <option value="active">В работе</option>
                         <option value="completed">Решено</option>
                       </select>
@@ -41,7 +41,7 @@
                         <p class="text-right col align-self-end date">{{ request.date }}</p>
                     </div>
                     <div class="row">
-                        <p class="text-left col col-sm-9 status" v-bind:class="[request.status]">Статус: {{ request.status }}</p>
+                        <p class="text-left col col-sm-9 status" v-bind:class="[request.status]">Статус: {{ request.status | translate }}</p>
                         <p class="text-right col align-self-end date">{{ request.time }}</p>
                     </div>
                     </li>

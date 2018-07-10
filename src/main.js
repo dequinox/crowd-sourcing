@@ -8,12 +8,16 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import './assets/global.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import {translate} from '@/translate'
 
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyB1nKNWOdILQQ-mDAJyQY_5CcEwjcuarXE',
   },
 })
+
+
+Vue.filter('translate', translate)
 
 Vue.use(BootstrapVue)
 Vue.config.productionTip = false
