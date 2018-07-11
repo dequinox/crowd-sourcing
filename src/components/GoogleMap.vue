@@ -23,7 +23,7 @@
       <div class="bottom text-left">
           <span @click="$store.commit('setStatus', 'ignored')" class="ignored">Не просмотрено</span>
           <span @click="$store.commit('setStatus', 'discussed')" class="discussed">На обсуждении</span>
-          <span @click="$store.commit('setStatus', 'active')" class="active">В работе</span>
+          <span @click="$store.commit('setStatus', 'pending')" class="pending">В работе</span>
           <span @click="$store.commit('setStatus', 'completed')" class="completed">Решено</span>
       </div>
     </div>
@@ -133,7 +133,7 @@ var mapStyles =
                     if (r.status === "completed"){
                         r.icon = { url : "https://image.ibb.co/gqFCNT/greenmark.png"}
                     }
-                    else if (r.status === "active") {
+                    else if (r.status === "pending") {
                         r.icon = { url : "https://image.ibb.co/bAAe2T/yellowmark.png"}
                     }
                     else if (r.status == "ignored"){

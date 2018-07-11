@@ -2,7 +2,7 @@ export function translate(word) {
     var translated = ""
 
     switch (word) {
-        case "active":
+        case "pending":
             translated = "В работе"
             break;
         case "completed":

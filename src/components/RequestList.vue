@@ -23,7 +23,7 @@
                         <option value="all" selected>Все</option>
                         <option value="ignored">Не просмотрено</option>
                         <option value="discussed">На обсуждении</option>
-                        <option value="active">В работе</option>
+                        <option value="pending">В работе</option>
                         <option value="completed">Решено</option>
                       </select>
 
@@ -35,13 +35,13 @@
                     v-if="requestSatisfied(request)"
                     v-on:click="select(request)"
                     class="list-group-item rounded-0"
-                    v-bind:class="[selected && request.id === selected.id ? activeClass : '']">
+                    v-bind:class="[selected && request.id === selected.id ? activeClass : '', request.status]">
                     <div class="row">
                         <strong class="text-left col col-sm-9 text-truncate">{{ request.title }}</strong><br/>
                         <p class="text-right col align-self-end date">{{ request.date }}</p>
                     </div>
                     <div class="row">
-                        <p class="text-left col col-sm-9 status" v-bind:class="[request.status]">Статус: {{ request.status | translate }}</p>
+                        <p class="text-left col col-sm-9">Статус: {{ request.status | translate }}</p>
                         <p class="text-right col align-self-end date">{{ request.time }}</p>
                     </div>
                     </li>
@@ -117,30 +117,21 @@
         border-bottom: 1px solid #dee2e6;
         background-color: rgba(56, 176, 157, 0.2);
     }
-    .status::before {
-            content: "";
-            display: inline-block;
-            width: 12px;
-            height: 12px;
-            margin-right: 5px;
-            vertical-align: middle;
-            border-radius: 100%;
+
+    .completed {
+        border-left: 5px solid #22a55a;
     }
 
-    .completed::before {
-        background-color: #22a55a;
+    .pending {
+        border-left: 5px solid #f2c94c;
     }
 
-    .active::before {
-        background-color: #f2c94c;
+    .ignored {
+        border-left: 5px solid #7e7e7e;
     }
 
-    .ignored::before {
-        background-color: #7e7e7e;
-    }
-
-    .discussed::before {
-        background-color: #511a85;
+    .discussed {
+        border-left: 5px solid #511a85;
     }
 
     input[type="radio"]:checked {

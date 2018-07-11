@@ -27,7 +27,7 @@
                        <select v-model="status" class="custom-select">
                            <option value="ignored">Не просмотрено</option>
                            <option value="discussed">На обсуждении</option>
-                           <option value="active">В работе</option>
+                           <option value="pending">В работе</option>
                          <option value="completed">Решено</option>
                        </select>
                     </div>
@@ -89,7 +89,7 @@
         background-color: #22a55a;
     }
 
-    .active::before {
+    .pending::before {
         background-color: #f2c94c;
     }
 
