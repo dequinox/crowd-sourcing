@@ -2,6 +2,16 @@
 
 > A Vue.js project
 
+# Docker
+
+```
+# build
+docker build -t dequinox/crowd-sourcing .
+
+# run
+docker run -d -p 80:80 dequinox/crowd-sourcing
+```
+
 ## Build Setup
 
 ``` bash
