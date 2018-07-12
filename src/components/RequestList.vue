@@ -119,7 +119,7 @@
     }
 
     .completed {
-        border-left: 5px solid #22a55a;
+        border-left: 5px solid #38B09D;
     }
 
     .pending {

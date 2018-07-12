@@ -10,7 +10,7 @@ export default new Vuex.Store({
         status: "all",
         type: "idea",
         selectedRequest: null,
-        center: { lat: 55.793633, lng: 49.116411 },
+        center: { lat: 55.750261, lng: 48.742984 },
     },
 
     getters: {

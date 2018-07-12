@@ -33,7 +33,7 @@
                     </div>
             </div>
             <div class="row justify-content-end">
-            <button type="button" class="col-5 mt-5"
+            <button type="button" class="col-4 mt-5"
             v-on:click="addComment({'text': comment, 'status': status})">Сохранить</button>
         </div>
         </div>
@@ -86,7 +86,7 @@
     }
 
     .completed::before {
-        background-color: #22a55a;
+        background-color: #38B09D;
     }
 
     .pending::before {
