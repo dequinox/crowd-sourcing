@@ -1,9 +1,9 @@
 <template>
     <div id="platform">
         <div class="row">
-            <RequestList class="sidebar col-md-4"/>
-            <RequestInfo class="col-md-4"/>
-            <GoogleMap class="col-md"/>
+            <RequestList class="sidebar col-md-4" style="height:100%"/>
+            <RequestInfo class="col-md-4" style="height:100%"/>
+            <GoogleMap class="col-md" style="height:100%"/>
         </div>
     </div>
 </template>

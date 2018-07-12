@@ -1,11 +1,11 @@
  <template>
-    <div>
+    <div style="height:100%">
         <img v-if="loading"
         width="150px"
         height="150px"
         src="https://s.yimg.com/ny/api/res/1.2/81EFT_aygExFdnRjnpnC.A--/YXBwaWQ9aGlnaGxhbmRlcjtzbT0xO3c9ODAw/http://media.zenfs.com/en-US/homerun/the_zoe_report_fashion_166/00f649c6b13a6a1bb6ad971428d79d0a"/>
         <div v-else class="list border">
-            <div class="filter">
+            <div class="filter p-4">
                 <div class="row">
                     <label class="col-auto">
                         <input type="radio" name="radio" value="problem" v-model="type"> <span class="label-text">Проблема</span>
@@ -15,8 +15,8 @@
                     </label>
                 </div>
 
-                <div class="row mt-3">
-                      <label class="col-auto stat">
+                <div class="row">
+                      <label class="col-auto my-auto">
                           <b>Статус:</b>
                       </label>
                       <select v-model="status" class="custom-select col-7">
@@ -37,8 +37,8 @@
                     class="list-group-item rounded-0"
                     v-bind:class="[selected && request.id === selected.id ? activeClass : '', request.status]">
                     <div class="row">
-                        <strong class="text-left col col-sm-9 text-truncate">{{ request.title }}</strong><br/>
-                        <p class="text-right col align-self-end date">{{ request.date }}</p>
+                        <strong class="text-left col col-sm-9 text-truncate my-auto">{{ request.title }}</strong><br/>
+                        <p class="text-right col align-self-end date my-auto">{{ request.date }}</p>
                     </div>
                     <!--<div class="row">
                         <p class="text-left col col-sm-9">Статус: {{ request.status | translate }}</p>
@@ -107,11 +107,6 @@
 </script>
 
 <style scoped>
-    .filter {
-        padding-top: 20px;
-        padding-left: 20px;
-        height: 12%;
-    }
     .selected {
         border-top: 1px solid #dee2e6;
         border-bottom: 1px solid #dee2e6;
@@ -147,14 +142,7 @@
     .custom-select {
         height: 30px;
     }
-    .stat {
-        margin: auto 0;
-        vertical-align: middle;
-        text-align: center;
-    }
-    .stat b {
-        margin: 0;
-    }
+
     input[type="radio"] + .label-text:before{
     	content: "\f10c";
         font-size: 18px;
@@ -228,9 +216,8 @@
 }
 
 ul {
-    padding-top: 10px;
-    height: 88%;
-    overflow-y: hidden;
+    height: calc(100% - 105.5px);
+    overflow-y: auto;
     overflow-x: hidden;
 }
  li {

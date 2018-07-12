@@ -27,6 +27,10 @@ export default new Vuex.Store({
 
         totalMarked(state) {
             return state.requests.filter(request => request.location).length
+        },
+
+        total(state) {
+            return state.requests.length
         }
     },
 

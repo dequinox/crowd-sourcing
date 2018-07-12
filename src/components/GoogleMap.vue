@@ -1,12 +1,12 @@
 <template>
     <div class="">
         <div class="box border">
-            <div class="top text-left"><b>На карте отображено {{ totalMarked }} из 10 заявок</b></div>
+            <div class="top text-left"><b>На карте отображено {{ totalMarked }} из {{ total }} заявок</b></div>
             <div class="map">
                 <GmapMap
                   :center="center"
                   :zoom="16"
-                  :animation="1"
+                  :animation="20"
                   map-type-id="terrain"
                   style="width: 100%; height: 100%"
                   v-bind:options="mapStyle"
@@ -126,7 +126,8 @@ var mapStyles =
 
             ...mapGetters({
                 requests: 'markedRequests',
-                totalMarked: 'totalMarked'
+                totalMarked: 'totalMarked',
+                total: 'total'
 
             }),
 
