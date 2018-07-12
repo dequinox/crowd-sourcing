@@ -40,10 +40,10 @@
                         <strong class="text-left col col-sm-9 text-truncate">{{ request.title }}</strong><br/>
                         <p class="text-right col align-self-end date">{{ request.date }}</p>
                     </div>
-                    <div class="row">
+                    <!--<div class="row">
                         <p class="text-left col col-sm-9">Статус: {{ request.status | translate }}</p>
                         <p class="text-right col align-self-end date">{{ request.time }}</p>
-                    </div>
+                    </div>-->
                     </li>
                 </ul>
         </div>

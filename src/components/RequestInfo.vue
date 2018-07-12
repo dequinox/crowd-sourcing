@@ -15,12 +15,12 @@
             {{ request.description }} <br/> <br/>
             <img class="image" v-if="request.image" :src="require(`@/assets/${request.image}`)" height="200px" />
             <div class="form-group">
-                <label><b>Ответ на заявку:</b></label>
+                <label><b>Ответ на заявку</b></label>
                 <textarea class="form-control" v-model="comment" rows="5" placeholder="Напишите ответ заявителю..."></textarea>
             </div>
              <br/>
              <div class="row">
-                      <label class="col-auto stat">
+                      <label class="col-auto my-auto">
                          <b>Статус заявки :</b>
                      </label>
                      <div class="col">
@@ -33,9 +33,10 @@
                     </div>
             </div>
             <div class="row justify-content-end">
-            <button type="button" class="col-4 mt-5"
-            v-on:click="addComment({'text': comment, 'status': status})">Сохранить</button>
-        </div>
+                <div class="col-5 mt-4">
+                    <button type="button" class="rounded" v-on:click="addComment({'text': comment, 'status': status})">Сохранить</button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -68,7 +69,7 @@
 
 </script>
 
-<style scope>
+<style scoped>
     .info {
         border-radius: 5px;
         background-color: #f6f8f9;
@@ -100,21 +101,17 @@
     .discussed::before {
         background-color: #511a85;
     }
+
     .custom-select {
         height: 30px;
     }
 
-    .stat {
-        margin: auto 0;
-    }
-
     button {
-        padding: 7px;
         border: none;
-        border-radius: 20px;
         background: #38B09D;
         color: white;
-        margin-right: 20px;
+        width: 100%;
+        padding: 7px;
     }
 
     .image {

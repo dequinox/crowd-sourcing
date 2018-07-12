@@ -1,31 +1,33 @@
 <template>
-    <div class="box border">
-        <div class="top text-left"><b>На карте отображено {{ totalMarked }} из 10 заявок</b></div>
-        <div class="map">
-            <GmapMap
-              :center="center"
-              :zoom="16"
-              :animation="1"
-              map-type-id="terrain"
-              style="width: 100%; height: 100%"
-              v-bind:options="mapStyle"
-            >
-              <GmapMarker
-                :key="marker.id"
-                v-for="marker in markers"
-                :position="marker.location"
-                :clickable="true"
-                :icon="marker.icon"
-                @click="select(marker)"
-              />
-          </GmapMap>
-        </div>
-      <div class="bottom text-left">
-          <span @click="$store.commit('setStatus', 'ignored')" class="ignored">Не просмотрено</span>
-          <span @click="$store.commit('setStatus', 'discussed')" class="discussed">На обсуждении</span>
-          <span @click="$store.commit('setStatus', 'pending')" class="pending">В работе</span>
-          <span @click="$store.commit('setStatus', 'completed')" class="completed">Решено</span>
-      </div>
+    <div class="">
+        <div class="box border">
+            <div class="top text-left"><b>На карте отображено {{ totalMarked }} из 10 заявок</b></div>
+            <div class="map">
+                <GmapMap
+                  :center="center"
+                  :zoom="16"
+                  :animation="1"
+                  map-type-id="terrain"
+                  style="width: 100%; height: 100%"
+                  v-bind:options="mapStyle"
+                >
+                  <GmapMarker
+                    :key="marker.id"
+                    v-for="marker in markers"
+                    :position="marker.location"
+                    :clickable="true"
+                    :icon="marker.icon"
+                    @click="select(marker)"
+                  />
+              </GmapMap>
+            </div>
+          <div class="bottom text-left">
+              <span @click="$store.commit('setStatus', 'ignored')" class="ignored">Не просмотрено</span>
+              <span @click="$store.commit('setStatus', 'discussed')" class="discussed">На обсуждении</span>
+              <span @click="$store.commit('setStatus', 'pending')" class="pending">В работе</span>
+              <span @click="$store.commit('setStatus', 'completed')" class="completed">Решено</span>
+          </div>
+    </div>
     </div>
 </template>
 
@@ -164,11 +166,32 @@ var mapStyles =
 </script>
 
 <style scoped>
+
+    .completed::before {
+        background-color: #38B09D;
+    }
+
+    .pending::before {
+        background-color: #f2c94c;
+    }
+
+    .ignored::before {
+        background-color: #7e7e7e;
+    }
+
+    .discussed::before {
+        background-color: #511a85;
+    }
+    .custom-select {
+        height: 30px;
+    }
     .top {
         padding: auto 0;
         height: 4%;
     }
     .box {
+        height: 100%;
+        width: 100%;
         border-radius: 5px;
     }
     .border {

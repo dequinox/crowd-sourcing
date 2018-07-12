@@ -67,7 +67,7 @@
     a {
         color: #38B09D;
     }
-    .selected .nav-link {
+    .navbar-nav .selected .nav-link {
         color: #38B09D;
     }
     .nav-link {

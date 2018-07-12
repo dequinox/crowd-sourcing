@@ -6,7 +6,6 @@ import App from './App'
 import store from '@/store/index'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-import './assets/global.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import {translate} from '@/translate'
 
