@@ -144,7 +144,7 @@
     }
 
     input[type="radio"] + .label-text:before{
-    	content: "\f10c";
+    	content: "🞅";
         font-size: 18px;
     	speak: none;
     	font-style: normal;
@@ -159,7 +159,7 @@
     }
 
     input[type="radio"]:checked + .label-text:before{
-    	content: "\f192";
+    	content: "🞉";
         font-size: 18px;
     	color: #38B09D;
     	animation: effect 250ms ease-in;

@@ -37,10 +37,11 @@ export default new Vuex.Store({
     actions: {
         fetchRequests(context) {
             return new Promise((resolve, reject) => {
-                Vue.http.get('http://localhost:8090/api/v1/requests', []).then(requests => {
-                    console.log(requests)
-                }, () => {});
-                resolve()
+                citizens.getRequests(requests => {
+                    context.commit('setRequests', requests)
+                    resolve()
+                    // Since this is prototype we can be sure that it resolves always
+                })
             })
         },
 

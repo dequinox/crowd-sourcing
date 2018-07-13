@@ -37,12 +37,12 @@ export default {
 }
 
 .custom-select {
-   background: #fff url("assets/arrow.png") no-repeat right 0.75rem center;
-   background-size: 10px 8px;
+   background: #fff url("assets/arrow.png") no-repeat right 0.75rem center !important;
+   background-size: 10px 8px !important;
 }
 
 body {
-    background-color: #e0e0e0;
+    background-color: #e0e0e0 !important;
     height: 90%;
 }
 
