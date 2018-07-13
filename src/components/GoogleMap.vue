@@ -205,6 +205,7 @@ var mapStyles =
 
     .bottom {
        padding-top: 10px;
+       font-size: 10px;
     }
     span {
         margin-right: 15px;

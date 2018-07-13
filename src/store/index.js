@@ -16,7 +16,7 @@ export default new Vuex.Store({
     getters: {
 
         markedRequests(state) {
-            return state.requests.filter(request => request.location)
+            return state.requests.filter(request => request.location && request.type == "idea")
         },
 
         requestSatisfied(state) {
