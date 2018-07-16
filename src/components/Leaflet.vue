@@ -3,7 +3,7 @@
   <div>
     <l-map style="height: 100%;" :zoom="zoom" :center="center">
       <l-tile-layer :url="url"></l-tile-layer>
-      <l-marker v-for="marker in markers" :key="marker.id" :visible="true" :lat-lng="marker.location" :icon="marker.icon"></l-marker>
+      <l-marker v-for="marker in markers" :key="marker._id" :visible="true" :lat-lng="marker.position" :icon="marker.icon"></l-marker>
     </l-map>
   </div>
 </template>
@@ -25,15 +25,6 @@ export default {
       center: L.latLng(55.750261, 48.742984),
       url:'http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png',
       marker: L.latLng(47.413220, -1.219482),
-      selectedIcon: L.icon({
-        iconUrl: 'http://leafletjs.com/examples/custom-icons/leaf-red.png',
-        shadowUrl: 'http://leafletjs.com/examples/custom-icons/leaf-shadow.png',
-        iconSize:     [38, 95],
-        shadowSize:   [50, 64],
-        iconAnchor:   [22, 94],
-        shadowAnchor: [4, 62],
-        popupAnchor:  [-3, -76]
-      }),
     }
 },
     computed: {
@@ -82,6 +73,11 @@ export default {
                       iconAnchor:   [15, 30],
                       shadowAnchor: [0, 30]
                     })
+                }
+
+                r.position = {
+                    lat: r.location.coordinates[0],
+                    lng: r.location.coordinates[1]
                 }
 
 

@@ -8,7 +8,7 @@ export default new Vuex.Store({
     state: {
         requests: [],
         status: "all",
-        type: "idea",
+        type: "problem",
         selectedRequest: null,
         center: { lat: 55.750261, lng: 48.742984 },
         data: null
@@ -17,17 +17,17 @@ export default new Vuex.Store({
     getters: {
 
         markedRequests(state) {
-            return state.requests.filter(request => request.location && request.type === state.type && (state.status === "all" || state.status === request.status))
+            return state.requests.filter(request => request.location.coordinates.length > 0 && request.request_type === state.type && (state.status === "all" || state.status === request.request_status))
         },
 
         requestSatisfied(state) {
             return (request) => {
-                return (request.type == state.type) && (state.status == "all" || state.status == request.status)
+                return (request.request_type == state.type) && (state.status == "all" || state.status == request.request_status)
             }
         },
 
         totalMarked(state) {
-            return state.requests.filter(request => request.location).length
+            return state.requests.filter(request => request.location.coordinates.length > 0).length
         },
 
         total(state) {
@@ -38,7 +38,9 @@ export default new Vuex.Store({
     actions: {
         fetchRequests(context) {
             return new Promise((resolve, reject) => {
-                Vue.http.get('http://127.0.0.1:8000/api/v1/requests/', []).then((response) => { console.log("hell yeah") }, () => { console.log("boooe yeah")});
+                Vue.http.get('http://127.0.0.1:8000/api/v1/requests/', []).then((response) => {
+                    context.commit('setRequests', response.data); resolve() },
+                    () => { console.log("Could not load data")});
 
                 /*citizens.getRequests(requests => {
                     context.commit('setRequests', requests)
@@ -50,10 +52,10 @@ export default new Vuex.Store({
 
         select(context, selectedRequest) {
             context.commit('setSelectedRequest', selectedRequest)
-            context.commit('setType', selectedRequest.type)
+            context.commit('setType', selectedRequest.request_type)
 
-            if (selectedRequest.location){
-                context.commit('setCenter', selectedRequest.location)
+            if (selectedRequest.location.coordinates.length > 0){
+                context.commit('setCenter', selectedRequest.location.coordinates)
             }
         },
 

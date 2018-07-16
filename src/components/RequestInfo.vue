@@ -6,14 +6,14 @@
                 <span class="cancel col" v-on:click="select(null)"><img class="float-right" src="https://www.modo.com/wp-content/themes/modo/assets/img/thin-close-icon.png" width="25px" height="25px"/></span>
             </div>
             <div class="row">
-                <span class="text-left col-sm-9 status mt-1" v-bind:class="request.status">Статус: {{ request.status | translate }}</span>
+                <span class="text-left col-sm-9 status mt-1" v-bind:class="request.request_status">Статус: {{ request.request_status | translate }}</span>
             </div>
             <hr>
             <b>Заявитель</b><br/>
-            {{ request.sender }} <br/> <br/>
+            {{ request.author.full_name }} <br/> <br/>
             <b>Описание</b> <br/>
             {{ request.description }} <br/> <br/>
-            <img class="image" v-if="request.image" :src="require(`@/assets/${request.image}`)" height="150px" />
+            <img class="image" v-if="request.images.length" :src="request.images[0]" height="150px" />
             <div class="form-group">
                 <label><b>Ответ на заявку</b></label>
                 <textarea class="form-control" v-model="comment" rows="3" placeholder="Напишите ответ заявителю..."></textarea>

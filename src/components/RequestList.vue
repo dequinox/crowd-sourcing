@@ -35,10 +35,10 @@
                     v-if="requestSatisfied(request)"
                     v-on:click="select(request)"
                     class="list-group-item rounded-0"
-                    v-bind:class="[selected && request.id === selected.id ? activeClass : '', request.status]">
+                    v-bind:class="[selected && request._id === selected._id ? activeClass : '', request.request_status]">
                     <div class="row">
                         <strong class="text-left col col-sm-9 text-truncate my-auto">{{ request.title }}</strong><br/>
-                        <p class="text-right col align-self-end date my-auto">{{ request.date }}</p>
+                        <p class="text-right col align-self-end date my-auto">{{ request.created_at }}</p>
                     </div>
                     <!--<div class="row">
                         <p class="text-left col col-sm-9">Статус: {{ request.status | translate }}</p>
