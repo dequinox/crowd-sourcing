@@ -16,7 +16,7 @@ export default new Vuex.Store({
     getters: {
 
         markedRequests(state) {
-            return state.requests.filter(request => request.location)
+            return state.requests.filter(request => request.location && request.type === state.type && (state.status === "all" || state.status === request.status))
         },
 
         requestSatisfied(state) {
@@ -36,6 +36,14 @@ export default new Vuex.Store({
 
     actions: {
         fetchRequests(context) {
+            this.$http.get('/someUrl').then(response => {
+
+                // get body data
+                this.someData = response.body;
+
+              }, response => {
+                // error callback
+              });
             return new Promise((resolve, reject) => {
                 citizens.getRequests(requests => {
                     context.commit('setRequests', requests)
