@@ -17,17 +17,13 @@ Vue.use(VueGoogleMaps, {
   },
 })
 
-Vue.http.options.xhr = {withCredentials: true};
-Vue.http.options.emulateJSON = true;
-Vue.http.options.emulateHTTP = true;
-Vue.http.options.crossOrigin = true;
+delete L.Icon.Default.prototype._getIconUrl;
 
-Vue.http.headers.common['Access-Control-Allow-Origin'] = true,
-Vue.http.headers.common['Access-Control-Allow-Origin'] = '*'
-
-Vue.http.headers.common['Content-Type'] = 'application/x-www-form-urlencoded';
-Vue.http.headers.common['Accept'] = 'application/json, text/plain, */*';
-Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, Accept, Content-Type, Authorization, Access-Control-Allow-Origin';
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
+  iconUrl: require('leaflet/dist/images/marker-icon.png'),
+  shadowUrl: require('leaflet/dist/images/marker-shadow.png'),
+});
 
 
 Vue.filter('translate', translate)

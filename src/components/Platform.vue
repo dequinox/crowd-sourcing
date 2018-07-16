@@ -3,7 +3,8 @@
         <div class="row">
             <RequestList class="sidebar col-md-4" style="height:100%"/>
             <RequestInfo class="col-md-4" style="height:100%"/>
-            <GoogleMap class="col-md" style="height:100%"/>
+            <!--<GoogleMap class="col-md" style="height:100%"/>-->
+            <Leaflet class="col-md" style="height:100%"/>
         </div>
     </div>
 </template>
@@ -13,13 +14,15 @@
     import RequestList from './RequestList.vue'
     import RequestInfo from './RequestInfo.vue'
     import GoogleMap from './GoogleMap.vue'
+    import Leaflet from './Leaflet.vue'
 
     export default {
         name: 'platform',
         components: {
             RequestList,
             RequestInfo,
-            GoogleMap
+            GoogleMap,
+            Leaflet
         }
     }
 </script>
