@@ -11,6 +11,7 @@ export default new Vuex.Store({
         type: "idea",
         selectedRequest: null,
         center: { lat: 55.750261, lng: 48.742984 },
+        data: null
     },
 
     getters: {
@@ -36,13 +37,14 @@ export default new Vuex.Store({
 
     actions: {
         fetchRequests(context) {
-        
             return new Promise((resolve, reject) => {
-                citizens.getRequests(requests => {
+                Vue.http.get('http://127.0.0.1:8000/api/v1/requests/', []).then((response) => { console.log("hell yeah") }, () => { console.log("boooe yeah")});
+
+                /*citizens.getRequests(requests => {
                     context.commit('setRequests', requests)
                     resolve()
                     // Since this is prototype we can be sure that it resolves always
-                })
+                })*/
             })
         },
 

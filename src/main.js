@@ -11,6 +11,8 @@ import {translate} from '@/translate'
 import VueResource from 'vue-resource'
 
 Vue.use(VueResource);
+Vue.http.options.root = '/root';
+Vue.http.headers.common['Authorization'] = 'Basic YXBpOnBhc3N3b3Jk';
 Vue.use(VueGoogleMaps, {
   load: {
     key: 'AIzaSyB1nKNWOdILQQ-mDAJyQY_5CcEwjcuarXE',
@@ -37,5 +39,5 @@ new Vue({
   store: store,
   gmapApi: VueGoogleMaps,
   template: '<App/>',
-  components: { App }
+  components: { App },
 })
