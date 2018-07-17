@@ -62,7 +62,13 @@ export default new Vuex.Store({
         addComment(context, comment) {
             return new Promise((resolve, reject) => {
                 console.log(comment.text, comment.status)
-                resolve()
+                var link = 'http://209.97.137.55:8000/api/v1/requests/' + comment.request._id + '/'
+                let data = comment.request
+                data.request_status = comment.status
+                data.replies.push(comment.text)
+                Vue.http.post(link, [data], []).then((response) => {
+                     resolve() },
+                    () => { console.log("Could not load data")});
             })
         }
     },

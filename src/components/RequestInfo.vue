@@ -34,7 +34,7 @@
             </div>
             <div class="row justify-content-end">
                 <div class="col-5 mt-4 mb-4">
-                    <button type="button" class="rounded" v-on:click="addComment({'text': comment, 'status': status})">Сохранить</button>
+                    <button type="button" class="rounded" v-on:click="addComment({ 'request' : request, 'text': comment, 'status': status})">Сохранить</button>
                 </div>
             </div>
         </div>
