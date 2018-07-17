@@ -6,8 +6,10 @@
             <div class="map">
                 <l-map style="height: 100%;" :zoom="zoom" :center="center">
                   <l-tile-layer :url="url"></l-tile-layer>
-                  <l-marker v-for="marker in markers" :key="marker._id" :visible="true" :lat-lng="marker.position" :icon="marker.icon"
-                  @click="select(marker)"></l-marker>
+                  <l-marker v-for="marker in markers" :key="marker._id" :visible="true" :lat-lng="marker.position"
+                  @click="select(marker)"
+                  :icon="marker.icon"
+                  ></l-marker>
                 </l-map>
               </GmapMap>
             </div>
@@ -54,7 +56,7 @@ export default {
 
         markers: function() {
             return this.requests.map( (r) => {
-                if (r.status === "completed"){
+                if (r.request_status === "completed"){
                     r.icon = L.icon({
                       iconUrl: 'https://image.ibb.co/gqFCNT/greenmark.png',
                       shadowUrl: 'http://koraku.tylermares.com/marker-shadow.png',
@@ -63,7 +65,7 @@ export default {
                       shadowAnchor: [0, 30]
                     })
                 }
-                else if (r.status === "pending") {
+                else if (r.request_status === "pending") {
                     r.icon = L.icon({
                       iconUrl: 'https://image.ibb.co/bAAe2T/yellowmark.png',
                       shadowUrl: 'http://koraku.tylermares.com/marker-shadow.png',
@@ -72,7 +74,7 @@ export default {
                       shadowAnchor: [0, 30]
                     })
                 }
-                else if (r.status == "ignored"){
+                else if (r.request_status == "ignored"){
                     r.icon = L.icon({
                       iconUrl: 'https://image.ibb.co/dzxRhT/greymark.png',
                       shadowUrl: 'http://koraku.tylermares.com/marker-shadow.png',
@@ -99,13 +101,13 @@ export default {
 
                 return r
             })
-        },
-
-        methods: {
-            ...mapActions({
-                select: 'select'
-            })
         }
+    },
+
+    methods: {
+        ...mapActions({
+            select: 'select'
+        })
     }
 }
 </script>
