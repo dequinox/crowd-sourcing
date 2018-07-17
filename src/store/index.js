@@ -38,7 +38,7 @@ export default new Vuex.Store({
     actions: {
         fetchRequests(context) {
             return new Promise((resolve, reject) => {
-                Vue.http.get('http://127.0.0.1:8000/api/v1/requests/', []).then((response) => {
+                Vue.http.get('http://209.97.137.55:8000/api/v1/requests', []).then((response) => {
                     context.commit('setRequests', response.data); resolve() },
                     () => { console.log("Could not load data")});
 
