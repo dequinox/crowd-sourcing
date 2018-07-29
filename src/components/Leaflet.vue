@@ -83,6 +83,15 @@ export default {
                       shadowAnchor: [0, 30]
                     })
                 }
+                else if (r.request_status == "irrelevant"){
+                    r.icon = L.icon({
+                        iconUrl: 'https://image.ibb.co/cS38r8/orange.png',
+                        shadowUrl: 'http://koraku.tylermares.com/marker-shadow.png',
+                        shadowSize:   [30, 30],
+                        iconAnchor:   [15, 30],
+                        shadowAnchor: [0, 30]
+                    })
+                }
                 else {
                     r.icon = L.icon({
                       iconUrl: 'https://image.ibb.co/dQBAGo/indigo.png',
