@@ -28,7 +28,8 @@
                            <option value="ignored">Не просмотрено</option>
                            <option value="discussed">На обсуждении</option>
                            <option value="pending">В работе</option>
-                         <option value="completed">Решено</option>
+                           <option value="completed">Решено</option>
+                           <option value="irrelevant">Не актуально</option>
                        </select>
                     </div>
             </div>
@@ -104,6 +105,10 @@
 
     .discussed::before {
         background-color: #511a85;
+    }
+
+    .irrelevant::before {
+        background-color: #FF8A65;
     }
 
     .custom-select {

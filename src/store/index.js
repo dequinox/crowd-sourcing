@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 import Vue from 'vue'
 import citizens from '@/api/requests'
+import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 
 Vue.use(Vuex)
 
@@ -41,12 +42,6 @@ export default new Vuex.Store({
                 Vue.http.get('http://209.97.137.55:8000/api/v1/requests/', []).then((response) => {
                     context.commit('setRequests', response.data); resolve() },
                     () => { console.log("Could not load data")});
-
-                /*citizens.getRequests(requests => {
-                    context.commit('setRequests', requests)
-                    resolve()
-                    // Since this is prototype we can be sure that it resolves always
-                })*/
             })
         },
 
@@ -54,21 +49,39 @@ export default new Vuex.Store({
             context.commit('setSelectedRequest', selectedRequest)
             context.commit('setType', selectedRequest.request_type)
 
-            if (selectedRequest.location.coordinates.length > 0){
-                context.commit('setCenter', selectedRequest.location.coordinates)
+            if (selectedRequest && selectedRequest.location.coordinates.length > 0){
+                context.commit('setCenter', selectedRequest.location.coordinates);
             }
+
         },
 
         addComment(context, comment) {
             return new Promise((resolve, reject) => {
                 console.log(comment.text, comment.status)
                 var link = 'http://209.97.137.55:8000/api/v1/requests/' + comment.request._id + '/'
-                let data = comment.request
-                data.request_status = comment.status
-                data.replies.push(comment.text)
-                Vue.http.post(link, [data], []).then((response) => {
+                comment.request_status = comment.status
+                var newdata = {
+            		"_id": comment.request._id,
+            		"author": {
+            			"messenger_id": comment.request.author.messenger_id,
+            			"full_name": comment.request.author.full_name
+            		},
+            		"request_type": comment.request.request_type,
+            		"request_status": comment.status,
+            		"title": comment.request.title,
+            		"description": comment.request.description,
+            		"location": {
+            			"type": comment.request.location.type,
+            			"coordinates": comment.request.location.coordinates
+            		},
+            		"images": comment.request.images,
+            		"created_at": comment.request.created_at,
+            		"updated_at": comment.request.updated_at,
+            		"replies": comment.request.replies
+            	};
+                Vue.http.put(link, newdata, []).then((response) => {
                      resolve() },
-                    () => { console.log("Could not load data")});
+                    (err) => { console.log(newdata); console.log(err)});
             })
         }
     },

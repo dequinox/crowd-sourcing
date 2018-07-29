@@ -4,20 +4,20 @@
         <div class="box border">
             <div class="top text-left"><b>На карте отображено {{ totalMarked }} из {{ total }} заявок</b></div>
             <div class="map">
-                <l-map style="height: 100%;" :zoom="zoom" :center="center">
+                <l-map class="leaflet" ref="map"  style="height: 100%; width: 100%;" :zoom="zoom" :center="center">
                   <l-tile-layer :url="url"></l-tile-layer>
                   <l-marker v-for="marker in markers" :key="marker._id" :visible="true" :lat-lng="marker.position"
                   @click="select(marker)"
                   :icon="marker.icon"
                   ></l-marker>
                 </l-map>
-              </GmapMap>
             </div>
           <div class="bottom text-left">
               <span @click="$store.commit('setStatus', 'ignored')" class="ignored">Не просмотрено</span>
               <span @click="$store.commit('setStatus', 'discussed')" class="discussed">На обсуждении</span>
               <span @click="$store.commit('setStatus', 'pending')" class="pending">В работе</span>
               <span @click="$store.commit('setStatus', 'completed')" class="completed">Решено</span>
+              <span @click="$store.commit('setStatus', 'irrelevant')" class="irrelevant">Не актуально</span>
           </div>
     </div>
     </div>
@@ -25,7 +25,7 @@
 
 <script>
 
-    import {mapState, mapGetters, mapActions} from 'vuex'
+import {mapState, mapGetters, mapActions} from 'vuex'
 import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 export default {
   name: 'example',
@@ -98,9 +98,14 @@ export default {
                     lng: r.location.coordinates[1]
                 }
 
-
                 return r
             })
+        }
+    },
+
+    watch: {
+        selected: function (val) {
+            this.$refs.map.mapObject.invalidateSize();
         }
     },
 
@@ -130,6 +135,10 @@ export default {
     .discussed::before {
         background-color: #511a85;
     }
+
+    .irrelevant::before {
+        background-color: #FF8A65;
+    }
     .custom-select {
         height: 30px;
     }
@@ -148,6 +157,11 @@ export default {
 
      .map {
         height: 92%;
+        width: 100%;
+    }
+
+    .leaflet {
+        width: 100%;
     }
 
     .bottom {

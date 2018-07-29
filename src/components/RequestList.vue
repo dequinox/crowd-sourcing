@@ -25,6 +25,7 @@
                         <option value="discussed">На обсуждении</option>
                         <option value="pending">В работе</option>
                         <option value="completed">Решено</option>
+                        <option value="irrelevant">Решено</option>
                       </select>
 
                 </div>
@@ -53,6 +54,7 @@
 <script>
 
     import {mapState, mapGetters, mapActions} from 'vuex'
+    import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
     export default {
 
         data() {
@@ -94,7 +96,7 @@
             ...mapActions({
                 fetchRequests: 'fetchRequests',
                 select: 'select'
-            })
+            }),
         },
 
         created() {
@@ -127,6 +129,10 @@
 
     .discussed {
         border-left: 5px solid #511a85;
+    }
+    
+    .irrelevant {
+        border-left: 5px solid #FF8A65;
     }
 
     input[type="radio"]:checked {
