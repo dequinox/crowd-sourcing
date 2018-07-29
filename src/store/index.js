@@ -5,6 +5,9 @@ import { LMap, LTileLayer, LMarker } from 'vue2-leaflet';
 
 Vue.use(Vuex)
 
+
+const BACK = 'http://209.97.137.55:8000/api/v1/';
+
 export default new Vuex.Store({
     state: {
         requests: [],
@@ -39,7 +42,7 @@ export default new Vuex.Store({
     actions: {
         fetchRequests(context) {
             return new Promise((resolve, reject) => {
-                Vue.http.get('http://209.97.137.55:8000/api/v1/requests/', []).then((response) => {
+                Vue.http.get(BACK +'requests/', []).then((response) => {
                     context.commit('setRequests', response.data); resolve() },
                     () => { console.log("Could not load data")});
             })
@@ -58,28 +61,10 @@ export default new Vuex.Store({
         addComment(context, comment) {
             return new Promise((resolve, reject) => {
                 console.log(comment.text, comment.status)
-                var link = 'http://209.97.137.55:8000/api/v1/requests/' + comment.request._id + '/'
-                comment.request_status = comment.status
-                var newdata = {
-            		"_id": comment.request._id,
-            		"author": {
-            			"messenger_id": comment.request.author.messenger_id,
-            			"full_name": comment.request.author.full_name
-            		},
-            		"request_type": comment.request.request_type,
-            		"request_status": comment.status,
-            		"title": comment.request.title,
-            		"description": comment.request.description,
-            		"location": {
-            			"type": comment.request.location.type,
-            			"coordinates": comment.request.location.coordinates
-            		},
-            		"images": comment.request.images,
-            		"created_at": comment.request.created_at,
-            		"updated_at": comment.request.updated_at,
-            		"replies": comment.request.replies
-            	};
-                Vue.http.put(link, newdata, []).then((response) => {
+                var link = (BACK +'requests/' + comment.request._id)
+                var data = comment.request;
+                data.request_status = comment.status;
+                Vue.http.put(link, data, []).then((response) => {
                      resolve() },
                     (err) => { console.log(newdata); console.log(err)});
             })
