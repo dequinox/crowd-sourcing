@@ -14,6 +14,9 @@ export function translate(word) {
         case "ignored":
             translated = "Не просмотрено"
             break;
+        case "irrelevant":
+            translated = "Не актуально"
+            break;
     }
 
     return translated
